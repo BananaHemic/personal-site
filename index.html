@@ -1,0 +1,265 @@
+<!--If you're reading this, know that I have no idea what I'm doing-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Brendan Lockhart</title>
+        <style>
+            body { margin: 0; }
+            #glcanvas {
+            display: block;
+                /*background-color: gray;*/
+                background-color: black;
+            }
+            #top_txt {
+                position: absolute;
+                color: white;
+                font-size: 3em;
+                left: 50%;
+                top: 40%;
+                transform: translate(-50%, -50%);
+                white-space: nowrap;
+            }
+            #examples {
+                width: 100%;
+                min-height: 80%;
+                margin-bottom: 2.5em;
+            }
+            .w3-bar {
+                background-color: black;
+                width: 100%;
+            }
+            .w3-bar-item {
+                padding: 16px 16px;
+                font-size: 14px;
+            }
+            .w3-button {
+                background-color: black;
+                color: white;
+                text-align: center;
+                border: none;
+            }
+            .w3-button:hover {
+                background-color: #018088;
+                color: white;
+            }
+            .w3-button:focus {
+                outline: 0;
+            }
+            .city h4 {
+                font-size: 26px;
+                line-height: 1.22em;
+                max-width: 700px;
+                margin: 0.7em auto 0.6em;
+                padding: 0 1em 0 1em;
+            }
+            .city p {
+                line-height: 1.58em;
+                font-size: 21px;
+                max-width: 700px;
+                margin: 0 auto 1em;
+                text-indent: 2.5em;
+                padding: 0 1em 0 1em;
+            }
+            #txt {
+                display: inline-block;
+                color: white;
+                font-family: 'Roboto', sans-serif;
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0;
+                padding: 12px;
+            }
+            hr.examples_divider {
+                margin: auto;
+                border-top: 1px solid #f9f9f9;
+                border-radius: 5px;
+                width: 60%;
+                position: absolute;
+                left: 20%;
+            }
+            #btn-group {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            #hmu {
+                margin-top: 1.5em;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            #hmu-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 5em;
+            }
+            .contact-info {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                display: flex;
+                padding: 1.3em 0 0.2em 0;
+                font-size: 20px;
+            }
+            #info-group {
+                margin-top: 0;
+                padding-left: 0;
+            }
+            .contact-img {
+                width: 24px;
+                margin-right: 1.2em;
+            }
+            #name {
+                margin: auto;
+            }
+            #hmu-header {
+                margin: auto;
+                font-size: 35px;
+            }
+            #professional-img {
+                margin: auto;
+                display: block;
+                max-width: 100%;
+            }
+            #professional-div {
+                background-color: #798c93;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="jquery-3.5.1.min.js"></script>
+        <script src="three.js"></script>
+        <script src="opener.js"></script>
+        <!--Opening webGL pane-->
+        <div id="glcanvas" style="width:100%;height:90%">
+            <p id=top_txt>I build stuff.</p>
+        </div>
+
+        <!--Stuff I've made pane-->
+        <div id="examples">
+            <div class="w3-bar w3-black">
+                <hr class="examples_divider">
+                <div id="btn-group">
+                    <p id=txt>Stuff like:</p>
+                    <button class="w3-bar-item w3-button tablink w3-red" onclick="openOption(event,'Live Video')">Live Video</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'VR')">VR</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Computer Vision')">Computer Vision</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Unity')">Unity3D</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Geophysics')">Geophysics</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Machine Learning')">Machine Learning</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Condensced Matter Physics')">Condensced Matter Physics</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openOption(event,'Image Signal Processing')">Image Signal Processing</button>
+                </div>
+             </div>
+             <div id="Live Video" class="w3-container w3-border city">
+                <h4>Live Video</h4>
+                <p>I built a network infrastructure that supported one-to-many broadcasts with less than 700ms of camera-to-monitor latency across the broader internet. Latency was a really interesting problem because it required optimizing every facet of the pipeline; it meant working on image acquisition, video compression, the autoscaling edge-origin network architecture, and the decompression and playback of the video. Each step had to both be fast and parallel to support 4K video at 60 fps, while also taking as little time as possible to pass data off to the next element of the pipeline.</p>
+                <p>Most video latency comes from the networking protocol used to send the compressed video data over the network to the target computer. Most established live video systems use HLS or RTMP, which have latencies of 3 to 30 seconds. To minimize that latency, I used the SRT protocol for all networking. SRT provides a balance between latency and reliability, so that you can trade off a more responsive stream at the expense of video corruptions becoming more likely. At the time, SRT was a very new protocol that wasn't quite ready for production use, so I worked with the creators to fix some bugs, and to polish a Gstreamer plugin.</p>
+                <p>The downside, however, to using SRT was the fact that few systems properly supported it. Because of this, we spent a lot of time creating our own SRT-compatible systems. One example of this is our Unity video player which, on Android, was actually more performant than VLC.</p>
+              </div>
+              <div id="VR" class="w3-container w3-border city" style="display:none">
+                <h4>Virtual Reality</h4>
+                <p>I fell in love with VR after I tried the DK1 back in 2013. I've released a number of VR titles, the most recent being <a href="https://gvr.tv">gvr.tv</a>. It was a VR game where you could drive a car with an attached VR camera around my actual living room. You could even buy treats for Gonzo, my friend's dog. It had a 97% positive rating on Steam, and a few users with over 100 hours logged.</p> 
+                <p> I also worked on a novel approach to streaming live VR that resulted in <a href="https://patents.google.com/patent/US20170200315A1">this patent</a></p>
+              </div>
+              <div id="Computer Vision" class="w3-container w3-border city" style="display:none">
+                <h4>Computer Vision</h4>
+                <p>I built an <a href="https://docs.opencv.org/master/d9/d6d/tutorial_table_of_content_aruco.html">aruco marker</a> detection system that asynchronously locates markers in a video stream, sends them over the network, and plays back the locations of the markers interpolated to be synchronized with the video stream. This was used so that we could display virtual elements on top of a piece of paper with a printed aruco on it. These virtual elements would be buttons, or videos, or 3D avatars of other users.</p> 
+                <p>I also worked on a system to dewarp stereoscopic fisheye video for playback. Most people make the assumption that fisheye video is equirectangular, as this makes the math involved in dewarping much simpler. However, this causes visible warping, that it especially prominent around the edges of the video. To improve this, I got distortion data of the lens from the manufacturer, took 50 images of a checkerboard, and ran the data through OpenCV's fisheye calibration system, using the provided lens data as the initial state for the solver. This generated distortion parameters that allowed me to create a very high quality display system. The final viewer was implemented in an HLSL shader for desktop to create the highest fidelity dewarping possible, and as a mesh for mobile where performance was critical.<p>
+              </div>
+              <div id="Unity" class="w3-container w3-border city" style="display:none">
+                <h4>Unity3D</h4>
+                <p>I've been working with Unity since roughly 2014. In that time I've built a number of applications with it, both for my own projects and for companies I've worked for. For example, in 2015 I released a small game called "3D Othello" that was available on Oculus Share. It was a multiplayer game where you and an opponent played a version of Othello that entailed a 3D grid of spaces, instead of a 2D map. It included an AI which, I am proud to say, frequently beat me at my own game.</p>
+                <p>I've also worked on some open source assets for Unity, including <a href="https://github.com/bananaHemic/mumble-unity">Mumble-Unity</a>, which allowed Unity to connect and talk to users of the popular Mumble application. It features smooth audio broadcasting and playback with negligible overhead and virtually no runtime allocations.</p>
+              </div>
+              <div id="Geophysics" class="w3-container w3-border city" style="display:none">
+                <h4>Geophysics</h4>
+                <p>As an undergraduate at the University of Maryland, I worked on building a novel approach to locate lunar seismic events based on the polarization of P and S waves. The approach worked well on terrestrial data, but the lunar crust added a lot of noise that made the method unreliable.</p> 
+              </div>
+              <div id="Machine Learning" class="w3-container w3-border city" style="display:none">
+                <h4>Machine Learning</h4>
+                <p>Admittedly, my understanding of Machine Learning is rather facile; I know enough to decide if a problem is ammenable for machine learning, and enough to solve a problem using--for example--tensorflow, but not enough to design a network from scratch.</p>
+                <p>The first project where I used machine learning was for my research at UC Davis. This used a neural network with one hidden layer, and would help identify steel balls in images that had failed to be identified in previous processing steps.</p>
+                <p>The second time I used machine learning was a system that took two images of a person, and created a realistic avatar of that person. This worked by passing the facial images to dlib, which generated a description vector of the face. Then this dlib vector would be used as the input layer for a deep neural network in tensorflow, which would output facial morphs for the user's avatar.</div>
+              <div id="Condensced Matter Physics" class="w3-container w3-border city" style="display:none">
+                <h4>Condensced Matter Physics</h4>
+                <p>In the summer of 2014 I was an undergraduate researcher at UC Davis. My research was on identifying patterns within granular dynamics. You can imagine that if you had a jar of rice and slowly tilted the cup, eventually the rice begins to fall over. What's interesting is that the angle at which the rice begins to topple is extremely variable. Sometimes it begins to slide at 20 degrees, and another time it may begin to slide at 40 degrees. We still don't have an understanding of what contributes to the stability of granules like rice. The idea behind my research is that if we generated thousands of images of granular sliding, we could then analyze the parsed data to discover what contributes to stability. My main contribution was in improving the detection of steel balls in a glass drum. Although I think that the research was interesting, honestly it was the project that helped me decide that I don't want a career in research.</p>
+              </div>
+              <div id="Image Signal Processing" class="w3-container w3-border city" style="display:none">
+                <h4>Image Signal Processing</h4>
+                <p>Initially, the imagery coming out of my video pipelines were soft, and muted. After looking into the problem, I found a number of causes for the blurriness, and ways to fix them. One contributor was the demosaicing algorithm used on the sensor. Modern digital cameras are only able to measure red or green or blue. Software then uses algorithms to fill in the missing color channels at each pixel. As a result, there is large corpus of research for how to best perform this interpolation. The default implementation provided by the camera manufacturer used a bilinear demosaicing which is simple to implement, but produces soft images with frequent artifacting. To obivate this blurriness, I implemented <a href="http://elynxsdk.free.fr/ext-docs/Demosaicing/todo/Menon_Andriani_IEEE_T_IP_2007.pdf">Demosaicing With Directional Filtering and a posteriori Decision</a> in CUDA. This uses information about where edges are in an image as motivation for which direction to interpolate along. This resulted in imagery that looked vibrant and crisp</p> 
+                <p>The second largest contributor to the loss of visual fidelity was the h264 compression. My initial plan was to upgrade to H265 using a custom encoding chip, but after integrating it, I learned that some of our target GPUs didn't support hardware H265 decoding, and software decoding was too slow for our resolution/framerate. For prerecorded videos, we could run day-long video compressions with software encoding and get outstanding video quality, but live video had to run using hardware encoding which prioritized speed and thoroughput over video fidelity. As a result, my focus was on preprocessing the image so that the encoder had an easier image to compress. The best way I found to do this was denoising the image, so that the encoder had less high frequency spatial information to handle. I worked on a novel image denoiser that used the slow but powerful <a href="http://www.cs.tut.fi/~foi/GCF-BM3D/">BM3D</a> to train a low-pass filter to recognize what high frequency data was noise, and what data was structure. This worked somewhat in my initial tests, but due to time concerns I ended up using a temporal filter that averaged groups of pixels over time, provided that they hadn't considerably changed. Were I to revisit this problem again, I'd like to try leveraging the Motion Vector engine on GPUs to determine where a pixel was in previous frames, and then average the resulting pixel across it's history.</p>
+              </div>
+        </div>
+        <div id="professional-div">
+            <img id="professional-img" src="very_professional_gimp.png">
+        </div>
+        <div id="hmu" style="width:100%">
+            <div id="hmu-group">
+                <h1 id="hmu-header">Hmu</h1>
+                <ul id="info-group">
+                    <li class="contact-info">
+                        <span id="name">Brendan Lockhart</span>
+                    </li>
+                    <li class="contact-info">
+                        <img class="contact-img" src="mail.svg">
+                        <span>b(the at symbol)gvr.tv</span>
+                    </li>
+                    <li class="contact-info">
+                        <img class="contact-img" src="logo-github.svg">
+                        <a href="https://github.com/bananaHemic/">Bananahemic</a>
+                    </li>
+                    <li class="contact-info">
+                        <img class="contact-img" src="logo-twitter.svg">
+                        <a href="https://github.com/bananaHemic/">iheartblocks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <script>
+    function openOption(evt, cityName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " w3-red";
+    }
+    document.head = document.head || document.getElementsByTagName('head')[0];
+    function changeFavicon(src) {
+        var link = document.createElement('link'), oldLink = document.getElementById('dynamic-favicon');
+        link.id = 'dynamic-favicon';
+        link.rel = 'shortcut icon';
+        link.href = src;
+        if (oldLink) {
+            document.head.removeChild(oldLink);
+        }
+        document.head.appendChild(link);
+    }
+    function animate(){
+        //console.log("animating");
+        if ( typeof animate.i == 'undefined' ) {
+            animate.i = 0;
+        }
+        var icon = icons[animate.i]
+        //console.log(animate.i);
+        changeFavicon(icon);
+        animate.i = animate.i + 1;
+        if(animate.i == icons.length){
+            animate.i = 0;
+        }
+    }
+    // The favicons 
+    const icons = [
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEX////xzbP6lADyWRL+7ADscCLlk3LMQ1/+AAAAAXRSTlMAQObYZgAAAD5JREFUCNdjYMAKhGEMYyjNbAgTMIAKIBgQNYzGxsoGUAEYIwjGUHKGKDJSUTIDM5JcnCD62VycoCazOAAJAHjcB2ILz8imAAAAAElFTkSuQmCC",
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEX////xzbP6lADyWRL+7ADscCLlk3LMQ1/+AAAAAXRSTlMAQObYZgAAAD5JREFUCNdjYMALDGAMZjgDJmQMZRgYG0IkjY0NoAwjYxhD2Risx9hEFcpQcTIDS5mquED0M7s4QQ1kcQASADuYBn4AderdAAAAAElFTkSuQmCC",
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEXxzbP6lADyWRL+7ADscCLlk3L////cMLG+AAAAAXRSTlMAQObYZgAAADpJREFUCNdjYMAGmDAZClCGEjqDCc5QhDKUFAWYIDKKQkoQhrCjEkRKWBDCUBQWhKhmNDaEGshsACQAw7sD/w6VoaQAAAAASUVORK5CYII=",
+        ];
+    animate();
+    setInterval(animate,250);
+    </script>
+	</body>
+</html>
