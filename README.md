@@ -1,6 +1,6 @@
 http://brendan.lockh.art
 
-Deployed via AWS S3 on brendanmlockhart@gmail account
+Deployed via AWS S3 on brendan gmail account
 TODO https
 
 To update, you have to go into AWS, S3, and manually upload a new file
